@@ -153,8 +153,8 @@
                 <h2 class="sidebar-title">Menú</h2>
             </div>
             <ul>
-                <li onclick="loadContent()">Clases - Los Días de la Semana en Inglés</li>
-                <li>Juego 1</li>
+                <li onclick="loadContent('https://ds182.github.io/Clase-1/')">Clases - Los Días de la Semana en Inglés</li>
+                <li onclick="loadContent('https://ds182.github.io/juego11/')">Juego 1</li>
                 <li>Juego 2</li>
                 <li>Juego 3</li>
                 <li>Canción 1</li>
@@ -190,9 +190,10 @@
         }
 
         // Función para cargar contenido (redirigir a un enlace específico)
-        function loadContent() {
-            window.location.href = 'https://ds182.github.io/Clase-1/'; // Redirige al enlace deseado
+        function loadContent(url) {
+            window.location.href = url; // Redirige al enlace deseado
         }
     </script>
 </body>
 </html>
+
