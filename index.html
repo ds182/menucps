@@ -5,8 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Días de la Semana en Inglés</title>
     <style>
+        /* Establecemos un tamaño base de fuente para todo el documento */
+        html {
+            font-size: 16px; /* Ajusta el tamaño base, útil para escalabilidad */
+        }
+
         body {
-            font-family: 'Comic Sans MS', cursive, sans-serif; /* Tipografía juvenil */
+            font-family: 'Arial', 'Verdana', 'sans-serif'; /* Cambiamos a una fuente más legible */
             margin: 0;
             padding: 0;
             background-color: #f0f4f8; /* Color de fondo suave */
@@ -87,20 +92,20 @@
 
         h1 {
             color: #007BFF; /* Color del título */
-            font-size: 2.5em; /* Tamaño del título */
+            font-size: 2rem; /* Tamaño relativo del título para escalabilidad */
             text-align: center; /* Centrar el título */
             margin-bottom: 20px; /* Espacio debajo del título */
         }
 
         h2 {
             color: #0056b3; /* Color del subtítulo */
-            font-size: 1.8em; /* Tamaño del subtítulo */
+            font-size: 1.5rem; /* Tamaño relativo del subtítulo */
             margin-bottom: 15px; /* Espacio debajo del subtítulo */
             text-align: center; /* Centrar el subtítulo */
         }
 
         p {
-            font-size: 1.2em; /* Tamaño del texto */
+            font-size: 1.1rem; /* Tamaño relativo del texto */
             line-height: 1.5; /* Espaciado entre líneas */
             margin-bottom: 15px; /* Espacio debajo del párrafo */
             text-align: justify; /* Justificar el texto */
@@ -118,11 +123,15 @@
             top: 10px;
             left: 10px;
             z-index: 1100; /* Asegura que el botón esté encima de todo */
-            font-size: 1.2em; /* Ajuste de tamaño del texto */
+            font-size: 1.2rem; /* Ajuste de tamaño del texto */
         }
 
         /* Ajustes para pantallas pequeñas */
         @media (max-width: 768px) {
+            html {
+                font-size: 14px; /* Ajustamos el tamaño base en pantallas pequeñas */
+            }
+
             .main-content {
                 margin-left: 0; /* Elimina el margen lateral */
                 padding: 15px; /* Ajusta el relleno */
@@ -144,7 +153,7 @@
     </style>
 </head>
 <body>
-    <button class="menu-button" onclick="toggleMenu()">Menu</button> <!-- Botón de menú -->
+    <button class="menu-button" onclick="toggleMenu()">Menu</button> <!-- Botón de menú actualizado -->
 
     <div class="container">
         <!-- Contenedor del menú lateral -->
@@ -153,15 +162,15 @@
                 <h2 class="sidebar-title">Menú</h2>
             </div>
             <ul>
-                <li onclick="loadContent('https://ds182.github.io/Clase-1/')">Clases - Los Días de la Semana en Inglés</li>
+                <li onclick="loadContent('https://ds182.github.io/Clase-1/')">Clase - Los Días de la Semana en Inglés</li>
                 <li onclick="loadContent('https://ds182.github.io/juego11/')">Juego 1</li>
-                <li onclick="loadContent('https://ds182.github.io/juego111/')">Juego 2</li>
-                <li onclick="loadContent('https://ds182.github.io/juego1111/')">Juego 3</li>
+                <li>Juego 2</li>
+                <li onclick="loadContent('https://ds182.github.io/juego1111/')">Juego 3</li> <!-- Link cambiado -->
                 <li>Canción 1</li>
                 <li>Canción 2</li>
                 <li>Video 1</li>
                 <li>Video 2</li>
-                <li>Examen Siguiente Módulo</li>
+                <li>Examen Del Módulo</li>
             </ul>
         </div>
 
@@ -170,15 +179,15 @@
             <h1>Días de la Semana en Inglés</h1>
             <p>¡Bienvenido a la clase sobre los días de la semana! Aquí aprenderás cómo decir los días de la semana en inglés.</p>
 
-            <h2>Explora y disfruta mientras aprendes:</h2>
+            <h2>Da clíc en el boton del menu y veras lo siguiente:</h2>
             <ul>
-                <li>Aprender los nombres de los días de la semana</li>
+                <li>Clase: Los días de la semana</li>
                 <li>Juegos interactivos para practicar</li>
                 <li>Canciones educativas para cantar y aprender</li>
                 <li>Videos explicativos llenos de diversión</li>
                 <li>Exámenes para evaluar tu progreso</li>
             </ul>
-            <p>¡Comencemos a aprender y a divertirnos mientras lo hacemos!</p>
+            <p>¡Comparte el link para que todos nos ayudemos!</p>
         </div>
     </div>
 
@@ -189,11 +198,10 @@
             sidebar.classList.toggle('collapsed'); // Alternar clase colapsada
         }
 
-        // Función para cargar contenido con redirección a enlaces específicos
+        // Función para cargar contenido (redirigir a un enlace específico)
         function loadContent(url) {
-            window.location.href = url; // Redirige al enlace especificado
+            window.location.href = url; // Redirige al enlace deseado
         }
     </script>
 </body>
 </html>
-
