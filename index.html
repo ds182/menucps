@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Días de la Semana en Inglés</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif; /* Tipografía juvenil */
+            margin: 0;
+            padding: 0;
+            background-color: #f0f4f8; /* Color de fondo suave */
+            color: #333; /* Color de texto */
+            display: flex;
+        }
+
+        .container {
+            display: flex;
+            height: 100vh;
+            width: 100%;
+            overflow: hidden; /* Evita el desbordamiento del contenedor */
+        }
+
+        .sidebar {
+            background-color: #007BFF; /* Azul */
+            color: white;
+            width: 250px;
+            padding: 15px;
+            transition: width 0.3s; /* Transición suave al cambiar el ancho */
+            overflow-y: auto; /* Agrega desplazamiento vertical si el contenido es mayor que la altura */
+            position: relative; /* Posición relativa para el contenedor del botón */
+        }
+
+        .sidebar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #0056b3; /* Color más oscuro */
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px; /* Espacio entre contenedores */
+        }
+
+        .sidebar-title {
+            transition: opacity 0.3s; /* Transición suave al ocultar/mostrar el título */
+            opacity: 1; /* Opacidad inicial */
+        }
+
+        .sidebar.collapsed .sidebar-title {
+            opacity: 0; /* Oculta el título al colapsar */
+            height: 0; /* Evita que ocupe espacio */
+            overflow: hidden; /* Evita desbordamiento */
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+            transition: opacity 0.3s; /* Transición suave al ocultar/mostrar la lista */
+        }
+
+        .sidebar li {
+            margin: 10px 0;
+            font-weight: bold; /* Texto en negrita */
+            cursor: pointer; /* Cambiar cursor al pasar por encima */
+            transition: background-color 0.3s; /* Transición para el cambio de fondo */
+            padding: 5px; /* Espacio interno en cada elemento */
+        }
+
+        .sidebar a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .sidebar li:hover {
+            background-color: #0056b3; /* Color de fondo al pasar el mouse */
+        }
+
+        .sidebar a:hover {
+            color: #ffcc00; /* Color amarillo al pasar el mouse */
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto; /* Permite el desplazamiento si es necesario */
+            position: relative; /* Posición relativa para el botón de regreso */
+        }
+
+        h1 {
+            color: #007BFF; /* Color del título */
+            font-size: 2.5em; /* Tamaño del título */
+            text-align: center; /* Centrar el título */
+            margin-bottom: 20px; /* Espacio debajo del título */
+        }
+
+        h2 {
+            color: #0056b3; /* Color del subtítulo */
+            font-size: 1.8em; /* Tamaño del subtítulo */
+            margin-bottom: 15px; /* Espacio debajo del subtítulo */
+            text-align: center; /* Centrar el subtítulo */
+        }
+
+        p {
+            font-size: 1.2em; /* Tamaño del texto */
+            line-height: 1.5; /* Espaciado entre líneas */
+            margin-bottom: 15px; /* Espacio debajo del párrafo */
+            text-align: justify; /* Justificar el texto */
+        }
+
+        .info {
+            display: none; /* Ocultar información por defecto */
+            margin-top: 20px; /* Espacio superior para el contenedor de información */
+            padding: 10px;
+            background-color: #e7f0ff; /* Color de fondo para el contenedor de información */
+            border-radius: 5px; /* Bordes redondeados */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra para un efecto de elevación */
+        }
+
+        .toggle-button {
+            background-color: #ffcc00; /* Color del botón */
+            color: #333;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            cursor: pointer;
+            margin-left: 10px; /* Espacio entre el botón y el título */
+        }
+
+        .toggle-button:hover {
+            background-color: #ffd700; /* Color más claro al pasar el mouse */
+        }
+
+        .collapsed {
+            width: 60px; /* Ancho del menú colapsado */
+        }
+
+        .collapsed ul {
+            display: none; /* Oculta la lista de enlaces en el menú colapsado */
+        }
+
+        .menu-button {
+            position: absolute; /* Posición absoluta para el botón del menú */
+            top: 10px;
+            right: 10px;
+            z-index: 10; /* Asegura que el botón esté por encima de otros elementos */
+        }
+
+        .menu-container {
+            margin-bottom: 15px; /* Espacio entre el contenedor del botón y el resto */
+        }
+
+        .icon {
+            cursor: pointer;
+            font-size: 24px; /* Tamaño del icono */
+            margin-left: 10px; /* Espacio a la izquierda del icono */
+            transition: color 0.2s; /* Transición suave para el color del icono */
+        }
+
+        .icon:hover {
+            color: #ffcc00; /* Color amarillo al pasar el mouse */
+        }
+
+        /* Estilo del botón para regresar */
+        .back-button {
+            position: fixed; /* Fijo para mantenerlo visible */
+            top: 20px; /* Espacio desde la parte superior */
+            right: 20px; /* Espacio desde la derecha */
+            background-color: #007BFF; /* Color de fondo del botón */
+            color: white; /* Color del texto */
+            border: none;
+            border-radius: 5px; /* Bordes redondeados */
+            padding: 5px 10px; /* Espacio interno reducido */
+            font-size: 0.9em; /* Tamaño de la fuente reducido */
+            cursor: pointer; /* Cambiar cursor al pasar por encima */
+            z-index: 100; /* Asegura que esté por encima de otros elementos */
+            transition: background-color 0.3s; /* Transición para el color del botón */
+        }
+
+        .back-button:hover {
+            background-color: #0056b3; /* Color más oscuro al pasar el mouse */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Contenedor del menú lateral -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h2 class="sidebar-title">Menú</h2> <!-- Título del menú -->
+                <button class="toggle-button menu-button" onclick="toggleMenu()">☰</button> <!-- Botón para ocultar/mostrar menú -->
+            </div>
+            <ul>
+                <li onclick="loadContent()">Clases - Los Días de la Semana en Inglés</li> <!-- Carga contenido al hacer clic -->
+                <li>Juego 1</li>
+                <li>Juego 2</li>
+                <li>Juego 3</li>
+                <li>Canción 1</li>
+                <li>Canción 2</li>
+                <li>Video 1</li>
+                <li>Video 2</li>
+                <li>Examen Siguiente Módulo</li>
+            </ul>
+        </div>
+
+        <!-- Contenedor del contenido principal -->
+        <div class="main-content" id="mainContent">
+            <h1>Días de la Semana en Inglés</h1>
+            <p>¡Bienvenido a la clase sobre los días de la semana! Aquí aprenderás cómo decir los días de la semana en inglés.</p>
+
+            <h2>Explora y disfruta mientras aprendes:</h2>
+            <ul>
+                <li>Aprender los nombres de los días de la semana</li>
+                <li>Juegos interactivos para practicar</li>
+                <li>Canciones educativas para cantar y aprender</li>
+                <li>Videos explicativos llenos de diversión</li>
+                <li>Exámenes para evaluar tu progreso</li>
+            </ul>
+            <p>¡Comencemos a aprender y a divertirnos mientras lo hacemos!</p>
+        </div>
+    </div>
+
+    <!-- Botón para regresar a la página principal -->
+    <button class="back-button" onclick="goBack()">Regresar a la Página Principal</button>
+
+    <script>
+        function toggleMenu() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('collapsed'); // Cambia la clase para colapsar o expandir el menú
+        }
+
+        function loadContent() {
+            const mainContent = document.getElementById('mainContent');
+            fetch('https://ds182.github.io/Iniciocps/')
+                .then(response => response.text())
+                .then(data => {
+                    mainContent.innerHTML = data; // Carga el contenido en el contenedor principal
+                })
+                .catch(error => {
+                    console.error('Error al cargar el contenido:', error);
+                });
+        }
+
+        function goBack() {
+            window.location.href = 'index.html'; // Cambia a la URL de tu página principal
+        }
+    </script>
+</body>
+</html>
