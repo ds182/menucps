@@ -144,7 +144,7 @@
     </style>
 </head>
 <body>
-    <button class="menu-button" onclick="toggleMenu()">Menu</button> <!-- Botón de menú actualizado -->
+    <button class="menu-button" onclick="toggleMenu()">Menu</button> <!-- Botón de menú -->
 
     <div class="container">
         <!-- Contenedor del menú lateral -->
@@ -155,7 +155,7 @@
             <ul>
                 <li onclick="loadContent('https://ds182.github.io/Clase-1/')">Clases - Los Días de la Semana en Inglés</li>
                 <li onclick="loadContent('https://ds182.github.io/juego11/')">Juego 1</li>
-                <li>Juego 2</li>
+                <li onclick="loadContent('https://ds182.github.io/juego111/')">Juego 2</li>
                 <li>Juego 3</li>
                 <li>Canción 1</li>
                 <li>Canción 2</li>
@@ -189,11 +189,10 @@
             sidebar.classList.toggle('collapsed'); // Alternar clase colapsada
         }
 
-        // Función para cargar contenido (redirigir a un enlace específico)
+        // Función para cargar contenido con redirección a enlaces específicos
         function loadContent(url) {
-            window.location.href = url; // Redirige al enlace deseado
+            window.location.href = url; // Redirige al enlace especificado
         }
     </script>
 </body>
 </html>
-
