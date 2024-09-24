@@ -12,13 +12,14 @@
             background-color: #f0f4f8; /* Color de fondo suave */
             color: #333; /* Color de texto */
             display: flex;
+            flex-direction: column; /* Ajuste para móviles */
+            height: 100vh;
         }
 
         .container {
             display: flex;
-            height: 100vh;
             width: 100%;
-            overflow: hidden; /* Evita el desbordamiento del contenedor */
+            height: 100%;
         }
 
         .sidebar {
@@ -26,9 +27,18 @@
             color: white;
             width: 250px;
             padding: 15px;
-            transition: width 0.3s; /* Transición suave al cambiar el ancho */
+            transition: width 0.3s, transform 0.3s; /* Añade transición para mostrar/ocultar */
             overflow-y: auto; /* Agrega desplazamiento vertical si el contenido es mayor que la altura */
-            position: relative; /* Posición relativa para el contenedor del botón */
+            position: fixed; /* Fija la barra lateral */
+            left: 0; /* Barra lateral a la izquierda */
+            top: 0;
+            bottom: 0;
+            transform: translateX(0); /* Visible por defecto */
+            z-index: 1000; /* Asegura que la barra esté encima del contenido */
+        }
+
+        .sidebar.collapsed {
+            transform: translateX(-100%); /* Oculta la barra lateral */
         }
 
         .sidebar-header {
@@ -41,21 +51,9 @@
             margin-bottom: 15px; /* Espacio entre contenedores */
         }
 
-        .sidebar-title {
-            transition: opacity 0.3s; /* Transición suave al ocultar/mostrar el título */
-            opacity: 1; /* Opacidad inicial */
-        }
-
-        .sidebar.collapsed .sidebar-title {
-            opacity: 0; /* Oculta el título al colapsar */
-            height: 0; /* Evita que ocupe espacio */
-            overflow: hidden; /* Evita desbordamiento */
-        }
-
         .sidebar ul {
             list-style-type: none;
             padding: 0;
-            transition: opacity 0.3s; /* Transición suave al ocultar/mostrar la lista */
         }
 
         .sidebar li {
@@ -83,8 +81,8 @@
         .main-content {
             flex: 1;
             padding: 20px;
+            margin-left: 250px; /* Ajusta según el ancho de la barra lateral */
             overflow-y: auto; /* Permite el desplazamiento si es necesario */
-            position: relative; /* Posición relativa para el botón de regreso */
         }
 
         h1 {
@@ -108,90 +106,54 @@
             text-align: justify; /* Justificar el texto */
         }
 
-        .info {
-            display: none; /* Ocultar información por defecto */
-            margin-top: 20px; /* Espacio superior para el contenedor de información */
-            padding: 10px;
-            background-color: #e7f0ff; /* Color de fondo para el contenedor de información */
-            border-radius: 5px; /* Bordes redondeados */
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra para un efecto de elevación */
-        }
-
-        .toggle-button {
+        .menu-button {
+            display: none; /* Oculto en pantallas grandes */
             background-color: #ffcc00; /* Color del botón */
             color: #333;
             border: none;
             border-radius: 5px;
             padding: 10px;
             cursor: pointer;
-            margin-left: 10px; /* Espacio entre el botón y el título */
-        }
-
-        .toggle-button:hover {
-            background-color: #ffd700; /* Color más claro al pasar el mouse */
-        }
-
-        .collapsed {
-            width: 60px; /* Ancho del menú colapsado */
-        }
-
-        .collapsed ul {
-            display: none; /* Oculta la lista de enlaces en el menú colapsado */
-        }
-
-        .menu-button {
-            position: absolute; /* Posición absoluta para el botón del menú */
+            position: fixed;
             top: 10px;
-            right: 10px;
-            z-index: 10; /* Asegura que el botón esté por encima de otros elementos */
+            left: 10px;
+            z-index: 1100; /* Asegura que el botón esté encima de todo */
+            font-size: 1.2em; /* Ajuste de tamaño del texto */
         }
 
-        .menu-container {
-            margin-bottom: 15px; /* Espacio entre el contenedor del botón y el resto */
-        }
+        /* Ajustes para pantallas pequeñas */
+        @media (max-width: 768px) {
+            .main-content {
+                margin-left: 0; /* Elimina el margen lateral */
+                padding: 15px; /* Ajusta el relleno */
+            }
 
-        .icon {
-            cursor: pointer;
-            font-size: 24px; /* Tamaño del icono */
-            margin-left: 10px; /* Espacio a la izquierda del icono */
-            transition: color 0.2s; /* Transición suave para el color del icono */
-        }
+            .sidebar {
+                width: 250px; /* Tamaño de la barra lateral */
+                transform: translateX(-100%); /* Oculta la barra lateral por defecto */
+            }
 
-        .icon:hover {
-            color: #ffcc00; /* Color amarillo al pasar el mouse */
-        }
+            .menu-button {
+                display: block; /* Muestra el botón en pantallas pequeñas */
+            }
 
-        /* Estilo del botón para regresar */
-        .back-button {
-            position: fixed; /* Fijo para mantenerlo visible */
-            top: 20px; /* Espacio desde la parte superior */
-            right: 20px; /* Espacio desde la derecha */
-            background-color: #007BFF; /* Color de fondo del botón */
-            color: white; /* Color del texto */
-            border: none;
-            border-radius: 5px; /* Bordes redondeados */
-            padding: 5px 10px; /* Espacio interno reducido */
-            font-size: 0.9em; /* Tamaño de la fuente reducido */
-            cursor: pointer; /* Cambiar cursor al pasar por encima */
-            z-index: 100; /* Asegura que esté por encima de otros elementos */
-            transition: background-color 0.3s; /* Transición para el color del botón */
-        }
-
-        .back-button:hover {
-            background-color: #0056b3; /* Color más oscuro al pasar el mouse */
+            .sidebar.collapsed {
+                transform: translateX(0); /* Muestra la barra lateral cuando se activa */
+            }
         }
     </style>
 </head>
 <body>
+    <button class="menu-button" onclick="toggleMenu()">Menu</button> <!-- Botón de menú actualizado -->
+
     <div class="container">
         <!-- Contenedor del menú lateral -->
         <div class="sidebar" id="sidebar">
             <div class="sidebar-header">
-                <h2 class="sidebar-title">Menú</h2> <!-- Título del menú -->
-                <button class="toggle-button menu-button" onclick="toggleMenu()">☰</button> <!-- Botón para ocultar/mostrar menú -->
+                <h2 class="sidebar-title">Menú</h2>
             </div>
             <ul>
-                <li onclick="loadContent()">Clases - Los Días de la Semana en Inglés</li> <!-- Carga contenido al hacer clic -->
+                <li onclick="loadContent()">Clases - Los Días de la Semana en Inglés</li>
                 <li>Juego 1</li>
                 <li>Juego 2</li>
                 <li>Juego 3</li>
@@ -220,11 +182,8 @@
         </div>
     </div>
 
-    <!-- Botón para regresar a la página principal -->
-    <button class="back-button" onclick="window.location.href='https://ds182.github.io/Clase-1/'">Regresar a la página principal</button>
-
     <script>
-        // Función para alternar el menú
+        // Función para alternar el menú lateral
         function toggleMenu() {
             var sidebar = document.getElementById('sidebar');
             sidebar.classList.toggle('collapsed'); // Alternar clase colapsada
