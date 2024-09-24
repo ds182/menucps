@@ -221,28 +221,18 @@
     </div>
 
     <!-- Botón para regresar a la página principal -->
-    <button class="back-button" onclick="goBack()">Regresar a la Página Principal</button>
+    <button class="back-button" onclick="window.location.href='https://ds182.github.io/Clase-1/'">Regresar a la página principal</button>
 
     <script>
+        // Función para alternar el menú
         function toggleMenu() {
-            const sidebar = document.getElementById('sidebar');
-            sidebar.classList.toggle('collapsed'); // Cambia la clase para colapsar o expandir el menú
+            var sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('collapsed'); // Alternar clase colapsada
         }
 
+        // Función para cargar contenido (redirigir a un enlace específico)
         function loadContent() {
-            const mainContent = document.getElementById('mainContent');
-            fetch('https://ds182.github.io/Iniciocps/')
-                .then(response => response.text())
-                .then(data => {
-                    mainContent.innerHTML = data; // Carga el contenido en el contenedor principal
-                })
-                .catch(error => {
-                    console.error('Error al cargar el contenido:', error);
-                });
-        }
-
-        function goBack() {
-            window.location.href = 'index.html'; // Cambia a la URL de tu página principal
+            window.location.href = 'https://ds182.github.io/Clase-1/'; // Redirige al enlace deseado
         }
     </script>
 </body>
