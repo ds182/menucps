@@ -3,205 +3,168 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Días de la Semana en Inglés</title>
+    <title>Carrusel Unificado</title>
     <style>
-        /* Establecemos un tamaño base de fuente para todo el documento */
-        html {
-            font-size: 16px; /* Ajusta el tamaño base, útil para escalabilidad */
-        }
-
         body {
-            font-family: 'Arial', 'Verdana', 'sans-serif'; /* Cambiamos a una fuente más legible */
+            font-family: 'Helvetica Neue', sans-serif;
+            background-color: #121212; /* Fondo oscuro */
+            color: #ffffff; /* Texto claro */
             margin: 0;
             padding: 0;
-            background-color: #f0f4f8; /* Color de fondo suave */
-            color: #333; /* Color de texto */
-            display: flex;
-            flex-direction: column; /* Ajuste para móviles */
-            height: 100vh;
+            overflow-x: hidden; /* Evita el scroll horizontal en el body */
         }
-
-        .container {
-            display: flex;
-            width: 100%;
-            height: 100%;
+        header {
+            background-image: url('https://i.ibb.co/sCFRJ9t/Dise-o-sin-t-tulo-11.png'); /* Aquí coloca el link de tu imagen de fondo */
+            background-size: cover;
+            background-position: center;
+            color: #ffffff;
+            padding: 50px 0;
+            text-align: center;
         }
-
-        .sidebar {
-            background-color: #007BFF; /* Azul */
-            color: white;
-            width: 250px;
-            padding: 15px;
-            transition: width 0.3s, transform 0.3s; /* Añade transición para mostrar/ocultar */
-            overflow-y: auto; /* Agrega desplazamiento vertical si el contenido es mayor que la altura */
-            position: fixed; /* Fija la barra lateral */
-            left: 0; /* Barra lateral a la izquierda */
-            top: 0;
-            bottom: 0;
-            transform: translateX(0); /* Visible por defecto */
-            z-index: 1000; /* Asegura que la barra esté encima del contenido */
-        }
-
-        .sidebar.collapsed {
-            transform: translateX(-100%); /* Oculta la barra lateral */
-        }
-
-        .sidebar-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #0056b3; /* Color más oscuro */
-            padding: 10px;
-            border-radius: 5px;
-            margin-bottom: 15px; /* Espacio entre contenedores */
-        }
-
-        .sidebar ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        .sidebar li {
-            margin: 10px 0;
-            font-weight: bold; /* Texto en negrita */
-            cursor: pointer; /* Cambiar cursor al pasar por encima */
-            transition: background-color 0.3s; /* Transición para el cambio de fondo */
-            padding: 5px; /* Espacio interno en cada elemento */
-        }
-
-        .sidebar a {
-            color: white;
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-
-        .sidebar li:hover {
-            background-color: #0056b3; /* Color de fondo al pasar el mouse */
-        }
-
-        .sidebar a:hover {
-            color: #ffcc00; /* Color amarillo al pasar el mouse */
-        }
-
-        .main-content {
-            flex: 1;
-            padding: 20px;
-            margin-left: 250px; /* Ajusta según el ancho de la barra lateral */
-            overflow-y: auto; /* Permite el desplazamiento si es necesario */
-        }
-
         h1 {
-            color: #007BFF; /* Color del título */
-            font-size: 2rem; /* Tamaño relativo del título para escalabilidad */
-            text-align: center; /* Centrar el título */
-            margin-bottom: 20px; /* Espacio debajo del título */
+            background-color: rgba(0, 0, 0, 0.6); /* Fondo semitransparente */
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 10px;
         }
-
-        h2 {
-            color: #0056b3; /* Color del subtítulo */
-            font-size: 1.5rem; /* Tamaño relativo del subtítulo */
-            margin-bottom: 15px; /* Espacio debajo del subtítulo */
-            text-align: center; /* Centrar el subtítulo */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
         }
-
-        p {
-            font-size: 1.1rem; /* Tamaño relativo del texto */
-            line-height: 1.5; /* Espaciado entre líneas */
-            margin-bottom: 15px; /* Espacio debajo del párrafo */
-            text-align: justify; /* Justificar el texto */
+        .carousel {
+            display: flex; /* Flexbox para disposición horizontal */
+            overflow-x: auto; /* Permite desplazamiento horizontal */
+            scroll-snap-type: x mandatory; /* Habilita el efecto de "snap" */
+            scrollbar-width: thin; /* Barra de desplazamiento delgada */
+            padding-bottom: 10px; /* Espacio para la barra de desplazamiento */
         }
-
-        .menu-button {
-            display: none; /* Oculto en pantallas grandes */
-            background-color: #ffcc00; /* Color del botón */
-            color: #333;
-            border: none;
-            border-radius: 5px;
+        .carousel::-webkit-scrollbar {
+            height: 8px; /* Altura de la barra de desplazamiento */
+        }
+        .carousel::-webkit-scrollbar-thumb {
+            background: #888; /* Color de la barra de desplazamiento */
+            border-radius: 10px; /* Bordes redondeados de la barra */
+        }
+        .carousel::-webkit-scrollbar-thumb:hover {
+            background: #555; /* Color de la barra al pasar el ratón */
+        }
+        .module {
+            flex: 0 0 auto; /* Evita que los módulos se compriman */
+            width: 300px; /* Ancho fijo de cada módulo */
+            margin: 20px; /* Espaciado entre módulos */
+            background-color: #2a2a2a; /* Color de fondo del módulo */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Sombra para profundidad */
+            padding: 20px;
+            text-align: center;
+            scroll-snap-align: start; /* Efecto de "snap" */
+            transition: transform 0.2s ease;
+        }
+        .module:hover {
+            transform: scale(1.05); /* Efecto hover: agrandar ligeramente */
+        }
+        .module img {
+            width: 100%; /* La imagen ocupa todo el ancho del módulo */
+            border-radius: 10px; /* Bordes redondeados */
+        }
+        .module h3 {
+            margin-top: 15px;
+            color: #ffcc00; /* Color del título */
+        }
+        .module a {
+            background-color: rgba(255, 204, 0, 0.8); /* Fondo amarillo semitransparente */
+            color: #121212; /* Texto oscuro */
             padding: 10px;
-            cursor: pointer;
-            position: fixed;
-            top: 10px;
-            left: 10px;
-            z-index: 1100; /* Asegura que el botón esté encima de todo */
-            font-size: 1.2rem; /* Ajuste de tamaño del texto */
+            border-radius: 5px;
+            text-decoration: none; /* Sin subrayado */
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 10px;
         }
-
-        /* Ajustes para pantallas pequeñas */
+        .module a:hover {
+            background-color: rgba(255, 204, 0, 1); /* Efecto hover: fondo más intenso */
+        }
+        h2 {
+            text-align: center;
+            padding-left: 20px;
+            color: #ffcc00;
+        }
+        footer {
+            background-color: #2a2a2a; /* Color de fondo del pie de página */
+            text-align: center;
+            padding: 20px;
+            border-top: 1px solid #ffcc00; /* Línea superior */
+            margin-top: 20px; /* Margen superior para separar del contenido */
+            color: #ffffff; /* Texto claro */
+        }
+        /* Responsividad */
         @media (max-width: 768px) {
-            html {
-                font-size: 14px; /* Ajustamos el tamaño base en pantallas pequeñas */
+            .module {
+                width: 90%; /* Módulos ocupan el 90% del ancho en pantallas pequeñas */
+                max-width: 300px; /* Mantiene el ancho máximo de los módulos */
             }
-
-            .main-content {
-                margin-left: 0; /* Elimina el margen lateral */
-                padding: 15px; /* Ajusta el relleno */
-            }
-
-            .sidebar {
-                width: 250px; /* Tamaño de la barra lateral */
-                transform: translateX(-100%); /* Oculta la barra lateral por defecto */
-            }
-
-            .menu-button {
-                display: block; /* Muestra el botón en pantallas pequeñas */
-            }
-
-            .sidebar.collapsed {
-                transform: translateX(0); /* Muestra la barra lateral cuando se activa */
+            header {
+                padding: 30px 0;
             }
         }
     </style>
 </head>
 <body>
-    <button class="menu-button" onclick="toggleMenu()">Menu</button> <!-- Botón de menú actualizado -->
 
-    <div class="container">
-        <!-- Contenedor del menú lateral -->
-        <div class="sidebar" id="sidebar">
-            <div class="sidebar-header">
-                <h2 class="sidebar-title">Menú</h2>
-            </div>
-            <ul>
-                <li onclick="loadContent('https://ds182.github.io/Clase-1/')">Clase - Los Días de la Semana en Inglés</li>
-                <li onclick="loadContent('https://ds182.github.io/juego11/')">Juego 1</li>
-                <li onclick="loadContent('https://ds182.github.io/juego111/')">Juego 2</li>
-                <li onclick="loadContent('https://ds182.github.io/juego1111/')">Juego 3</li> <!-- Link cambiado -->
-                <li onclick="loadContent('https://ds182.github.io/cancion1/')">Canción 1</li>
-                <li onclick="loadContent('https://ds182.github.io/cancion2/')">Canción 2</li>
-                <li onclick="loadContent('https://ds182.github.io/video1/')">Video 1</li>
-                <li onclick="loadContent('https://ds182.github.io/video2/')">Video 2</li>
-                <li onclick="loadContent('https://ds182.github.io/Exam1/')">Exam 1</li>
-            </ul>
+<header>
+    <h1>Modulo Gratuito.</h1>
+</header>
+
+<div class="container">
+    <h2>Recursos Interactivos</h2>
+    <div class="carousel">
+        <!-- Apunte -->
+        <div class="module" id="apunte1">
+            <img src="https://i.ibb.co/vXtHdJw/Dise-o-sin-t-tulo-12.png" alt="Apunte 1">
+            <h3>APUNTE</h3>
+            <p>Días de la semana en inglés.</p>
+            <a href="https://ds182.github.io/Clase-1/" id="linkApunte1">Acceder</a>
         </div>
 
-        <!-- Contenedor del contenido principal -->
-        <div class="main-content" id="mainContent">
-            <h1>Días de la Semana en Inglés</h1>
-            <p>¡Bienvenido a la clase sobre los días de la semana! Aquí aprenderás cómo decir los días de la semana en inglés.</p>
-
-            <h2>Da clíc en el boton del menu y veras lo siguiente:</h2>
-            <ul>
-                <li>Clase: Los días de la semana</li>
-                <li>Juegos interactivos para practicar</li>
-                <li>Canciones educativas para cantar y aprender</li>
-                <li>Videos explicativos llenos de diversión</li>
-                <li>Exámenes para evaluar tu progreso</li>
-            </ul>
-            <p>¡Comparte el link para que todos nos ayudemos!</p>
+        <!-- Canción -->
+        <div class="module" id="cancion1">
+            <img src="https://i.ibb.co/6X2cySF/Dise-o-sin-t-tulo-14.png" alt="Canción 1">
+            <h3>CANCIÓN</h3>
+            <p>Escucha y completa.</p>
+            <a href="https://ds182.github.io/cancion1/" id="linkCancion1">Escuchar</a>
         </div>
+
+        <!-- Video -->
+        <div class="module" id="video1">
+            <img src="https://i.ibb.co/XtmGyt7/Dise-o-sin-t-tulo-15.png" alt="Video 1">
+            <h3>VIDEO</h3>
+            <p>Observa el video.</p>
+            <a href="https://ds182.github.io/video2/" id="linkVideo1">Ver Video</a>
+        </div>
+
+        <!-- Juego -->
+        <div class="module" id="juego1">
+            <img src="https://i.ibb.co/bRYn9Jw/Dise-o-sin-t-tulo-13.png" alt="Juego 1">
+            <h3>JUEGO</h3>
+            <p>Juega y Diviertete Aprendiendo.</p>
+            <a href="https://ds182.github.io/juego11/" id="linkJuego1">Jugar Ahora</a>
+        </div>
+
+        <!-- Anuncio Medida de los anuncios 300x150-->
+        <div class="module" id="anuncio1">
+            <img src="https://i.ibb.co/z4fKng9/Dise-o-sin-t-tulo-16.png" alt="Anuncio 1">
+            <h3>ANUNCIO ESPECIAL</h3>
+            <p>"Tú eres el dueño de tu destino; cada decisión cuenta."</p>
+            <a href="#" id="linkAnuncio1">Más Información</a>
+        </div>
+
     </div>
+</div>
 
-    <script>
-        // Función para alternar el menú lateral
-        function toggleMenu() {
-            var sidebar = document.getElementById('sidebar');
-            sidebar.classList.toggle('collapsed'); // Alternar clase colapsada
-        }
+<footer>
+    <p>&copy; 2024 English School CPS. Todos los derechos reservados.</p>
+</footer>
 
-        // Función para cargar contenido (redirigir a un enlace específico)
-        function loadContent(url) {
-            window.location.href = url; // Redirige al enlace deseado
-        }
-    </script>
 </body>
 </html>
