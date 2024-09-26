@@ -6,26 +6,25 @@
     <title>Carrusel Unificado</title>
     <style>
         body {
-            font-family: 'Helvetica Neue', sans-serif;
-            background-color: #121212; /* Fondo oscuro */
-            color: #ffffff; /* Texto claro */
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
+            background-color: #121212; /* Fondo oscuro */
+            color: #ffffff; /* Texto claro */
             overflow-x: hidden; /* Evita el scroll horizontal en el body */
         }
         header {
-            background-image: url('https://i.ibb.co/sCFRJ9t/Dise-o-sin-t-tulo-11.png'); /* Aquí coloca el link de tu imagen de fondo */
+            background-image: url('https://i.ibb.co/sCFRJ9t/Dise-o-sin-t-tulo-11.png');
             background-size: cover;
             background-position: center;
-            color: #ffffff;
-            padding: 50px 0;
+            padding: 60px 0;
             text-align: center;
         }
         h1 {
-            background-color: rgba(0, 0, 0, 0.6); /* Fondo semitransparente */
-            display: inline-block;
-            padding: 10px 20px;
-            border-radius: 10px;
+            font-size: 2.5em;
+            margin: 0;
+            color: #ffcc00;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.7);
         }
         .container {
             max-width: 1200px;
@@ -33,79 +32,60 @@
             padding: 20px;
         }
         .carousel {
-            display: flex; /* Flexbox para disposición horizontal */
-            overflow-x: auto; /* Permite desplazamiento horizontal */
-            scroll-snap-type: x mandatory; /* Habilita el efecto de "snap" */
-            scrollbar-width: thin; /* Barra de desplazamiento delgada */
-            padding-bottom: 10px; /* Espacio para la barra de desplazamiento */
-        }
-        .carousel::-webkit-scrollbar {
-            height: 8px; /* Altura de la barra de desplazamiento */
-        }
-        .carousel::-webkit-scrollbar-thumb {
-            background: #888; /* Color de la barra de desplazamiento */
-            border-radius: 10px; /* Bordes redondeados de la barra */
-        }
-        .carousel::-webkit-scrollbar-thumb:hover {
-            background: #555; /* Color de la barra al pasar el ratón */
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Disposición responsiva */
+            gap: 20px; /* Espacio entre módulos */
+            overflow: hidden; /* Evita el desbordamiento */
         }
         .module {
-            flex: 0 0 auto; /* Evita que los módulos se compriman */
-            width: 300px; /* Ancho fijo de cada módulo */
-            margin: 20px; /* Espaciado entre módulos */
-            background-color: #2a2a2a; /* Color de fondo del módulo */
+            background-color: #2a2a2a; 
             border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Sombra para profundidad */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); 
             padding: 20px;
             text-align: center;
-            scroll-snap-align: start; /* Efecto de "snap" */
-            transition: transform 0.2s ease;
+            transition: transform 0.2s ease, box-shadow 0.2s ease; /* Suaviza la interacción */
         }
         .module:hover {
-            transform: scale(1.05); /* Efecto hover: agrandar ligeramente */
+            transform: scale(1.05); 
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.7); 
         }
         .module img {
-            width: 100%; /* La imagen ocupa todo el ancho del módulo */
-            border-radius: 10px; /* Bordes redondeados */
+            width: 100%; 
+            border-radius: 10px; 
+            height: auto; /* Mantiene la proporción de la imagen */
         }
         .module h3 {
             margin-top: 15px;
-            color: #ffcc00; /* Color del título */
+            color: #ffcc00; 
+            font-size: 1.5em; /* Tamaño de fuente para encabezados */
         }
         .module a {
-            background-color: rgba(255, 204, 0, 0.8); /* Fondo amarillo semitransparente */
-            color: #121212; /* Texto oscuro */
-            padding: 10px;
+            background-color: rgba(255, 204, 0, 0.8); 
+            color: #121212; 
+            padding: 10px 15px; /* Aumenta el padding para enlaces */
             border-radius: 5px;
-            text-decoration: none; /* Sin subrayado */
+            text-decoration: none; 
             font-weight: bold;
             display: inline-block;
             margin-top: 10px;
+            transition: background-color 0.2s ease; /* Suaviza el cambio de color */
         }
         .module a:hover {
-            background-color: rgba(255, 204, 0, 1); /* Efecto hover: fondo más intenso */
-        }
-        h2 {
-            text-align: center;
-            padding-left: 20px;
-            color: #ffcc00;
+            background-color: rgba(255, 204, 0, 1); 
         }
         footer {
-            background-color: #2a2a2a; /* Color de fondo del pie de página */
+            background-color: #2a2a2a; 
             text-align: center;
             padding: 20px;
-            border-top: 1px solid #ffcc00; /* Línea superior */
-            margin-top: 20px; /* Margen superior para separar del contenido */
-            color: #ffffff; /* Texto claro */
+            color: #ffffff; 
+            border-top: 1px solid #ffcc00; 
         }
-        /* Responsividad */
         @media (max-width: 768px) {
-            .module {
-                width: 90%; /* Módulos ocupan el 90% del ancho en pantallas pequeñas */
-                max-width: 300px; /* Mantiene el ancho máximo de los módulos */
-            }
             header {
-                padding: 30px 0;
+                padding: 40px 0; /* Ajusta el padding en pantallas más pequeñas */
+            }
+            h1 {
+                font-size: 2em; /* Reduce el tamaño de la fuente en pantallas pequeñas */
             }
         }
     </style>
@@ -113,11 +93,10 @@
 <body>
 
 <header>
-    <h1>Modulo Gratuito.</h1>
+    <h1>Módulo Gratuito</h1>
 </header>
 
 <div class="container">
-    <h2>Recursos Interactivos</h2>
     <div class="carousel">
         <!-- Apunte -->
         <div class="module" id="apunte1">
@@ -147,18 +126,17 @@
         <div class="module" id="juego1">
             <img src="https://i.ibb.co/bRYn9Jw/Dise-o-sin-t-tulo-13.png" alt="Juego 1">
             <h3>JUEGO</h3>
-            <p>Juega y Diviertete Aprendiendo.</p>
+            <p>Juega y diviértete aprendiendo.</p>
             <a href="https://ds182.github.io/juego11/" id="linkJuego1">Jugar Ahora</a>
         </div>
 
-        <!-- Anuncio Medida de los anuncios 300x150-->
+        <!-- Anuncio -->
         <div class="module" id="anuncio1">
             <img src="https://i.ibb.co/z4fKng9/Dise-o-sin-t-tulo-16.png" alt="Anuncio 1">
             <h3>ANUNCIO ESPECIAL</h3>
             <p>"Tú eres el dueño de tu destino; cada decisión cuenta."</p>
             <a href="#" id="linkAnuncio1">Más Información</a>
         </div>
-
     </div>
 </div>
 
